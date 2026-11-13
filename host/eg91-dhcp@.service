@@ -1,0 +1,12 @@
+# DHCP client for the EG91's ECM interface, started by 90-eg91-ecm.rules.
+# Stops automatically when the interface disappears (modem switched back to
+# default mode, or re-enumerating). Install to /etc/systemd/system/.
+[Unit]
+Description=DHCP on EG91 ECM interface %i
+BindsTo=sys-subsystem-net-devices-%i.device
+After=sys-subsystem-net-devices-%i.device
+
+[Service]
+ExecStart=/sbin/udhcpc -f -i %i
+Restart=on-failure
+RestartSec=5

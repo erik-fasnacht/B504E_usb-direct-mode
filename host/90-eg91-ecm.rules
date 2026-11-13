@@ -1,0 +1,5 @@
+# Start DHCP on the EG91's ECM network interface whenever it appears.
+# The B504e firmware only puts the modem in ECM mode during a pipe, so this
+# interface (usually usb0) only exists while the host has the modem.
+# Install to /etc/udev/rules.d/ together with eg91-dhcp@.service.
+ACTION=="add", SUBSYSTEM=="net", KERNEL=="usb*", ATTRS{idVendor}=="2c7c", ATTRS{idProduct}=="0191", TAG+="systemd", ENV{SYSTEMD_WANTS}+="eg91-dhcp@%k.service"

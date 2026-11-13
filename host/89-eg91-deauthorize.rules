@@ -1,0 +1,14 @@
+# Keep the EG91 modem's USB deauthorized whenever it appears.
+#
+# While a USB host has the modem's USB configured, the modem stops answering
+# Device OS reliably on the B504e's UART (No response from NCP a few minutes
+# into a session, vitals requests going unanswered). With the cable plugged
+# in but the device deauthorized, the modem behaves normally.
+#
+# So the host only connects to the modem's USB during a pipe: pipe_client.sh
+# authorizes it at PIPE READY. After the pipe, the B504e power-cycles the
+# modem back into its default mode, and this rule deauthorizes it again when
+# it re-enumerates (as it does on every modem power cycle).
+#
+# Install to /etc/udev/rules.d/.
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="2c7c", ATTR{idProduct}=="0191", ATTR{authorized}="0"
