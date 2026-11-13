@@ -68,7 +68,6 @@ docs/
   BRINGUP.md             Step-by-step setup, from boxed hardware to a working pipe
   PROTOCOL.md            UART protocol, Ledger schemas, configuration
   TESTING.md             Test scenarios, results, findings, and limitations
-  PARTICLE_NOTES.md      Modem and Device OS behaviors found during testing
 LICENSE                  BSD 3-Clause
 ```
 
@@ -106,7 +105,6 @@ The full procedure is in [docs/BRINGUP.md](docs/BRINGUP.md). In short:
 - [docs/BRINGUP.md](docs/BRINGUP.md): hardware, wiring, Mac and host setup, cloud setup, flashing, first pipe, troubleshooting
 - [docs/PROTOCOL.md](docs/PROTOCOL.md): the UART protocol, Ledger schemas, environment variables, and timing
 - [docs/TESTING.md](docs/TESTING.md): test scenarios, expected output, recorded results, findings, and known limitations
-- [docs/PARTICLE_NOTES.md](docs/PARTICLE_NOTES.md): modem and Device OS behaviors found during testing, with evidence
 
 ## Status
 
@@ -129,7 +127,7 @@ See [docs/TESTING.md](docs/TESTING.md) for the results, the findings behind the 
 - **A protocol version.** Report it at boot and on request, so hosts and firmware can evolve independently.
 - **Shorter handover.** Lower `PIPE_SETTLE_S` once the modem's data-session timing in ECM mode is characterized.
 - **Data while Device OS stays connected.** With `qmi_wwan` in the host kernel, the modem could stay in its default mode and the host could use a separate PDP context, removing the mode switching (and possibly the offline window) altogether. Needs a custom host kernel and testing of concurrent use.
-- **Upstream fixes.** Several workarounds here (the deauthorize rule, the host-side modem reboot) cover modem and Device OS behaviors described in [docs/PARTICLE_NOTES.md](docs/PARTICLE_NOTES.md). If Particle addresses them, the design could get simpler.
+- **Simpler host integration.** The deauthorize rule and the host-side modem reboot work around how the modem behaves with a USB host attached. Future modem or Device OS changes may allow a simpler design.
 
 ## License
 

@@ -1,0 +1,5 @@
+# Particle build output
+firmware/target/
+
+# macOS
+.DS_Store

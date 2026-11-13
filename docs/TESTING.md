@@ -153,7 +153,7 @@ Bench setup: B504e on Device OS 6.4.1, ConnectCore 93 DVK on DEY 5.0-r3 (stock),
 
 ## Findings
 
-These shaped the design and are worth knowing for anyone building on it. The modem behaviors are summarized for Particle in [PARTICLE_NOTES.md](PARTICLE_NOTES.md).
+These shaped the design and are worth knowing for anyone building on it.
 
 - **ECM mode blocks Device OS.** With the modem in ECM mode, Device OS can't dial (`Failed to enter data mode`). Hence switching to ECM only for pipes.
 - **A host with the modem's USB configured disrupts Device OS.** While the CC93 has the modem's USB configured, even with no program using its ports, each vitals request is followed 94 seconds later by `No response from NCP` and a ~45 s outage. Deauthorizing the modem's USB outside pipes fixes it (the udev rule). Changing the modem's URC port didn't help, so the modem's configuration is left at its defaults.
